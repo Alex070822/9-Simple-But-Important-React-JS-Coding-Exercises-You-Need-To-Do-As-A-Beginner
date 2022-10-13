@@ -5,7 +5,7 @@ import './index.css';
 function AnimalList(props) {
   const animals = props.animals
   const listItems = animals.map((animal) =>
-      <li key={animal.toString()}>
+      <li key={animal}>
         {animal}
       </li>
   )

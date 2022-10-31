@@ -1,19 +1,16 @@
 import { useState, useEffect } from "react"
-import CardInfo from "./cardInfo"
+import CardInfo from "./card-info"
 import "./App.css"
 
 const endpointUrl = "https://random-data-api.com/api/users/random_user?size=10"
 
 function App() {
-  console.log("# Render")
-
   const [model, setModel] = useState({
     items: [],
     shouldLoadItems: true,
   })
 
   useEffect(() => {
-    console.log("# useEffect")
     const fetchData = async () => {
       const response = await fetch(endpointUrl)
       const data = await response.json()

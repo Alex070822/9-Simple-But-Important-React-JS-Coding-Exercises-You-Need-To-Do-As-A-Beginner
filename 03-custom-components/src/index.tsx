@@ -63,6 +63,7 @@ const buttonGroup = (
       <Divider/>
 
       {/* with spread props */}
+
       <div className="container">
         {
           buttonConfig.map(props => {

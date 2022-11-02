@@ -49,12 +49,18 @@ const buttonConfig = [
   }
 ]
 
+interface IButtonConfigProps {
+  id: string
+  key: number
+  color: string
+}
+
 const buttonGroup = (
     <>
       {/* with individual props */}
       <div className="container">
         {
-          buttonConfig.map(({id, key, color}) => {
+          buttonConfig.map(({id, key, color}:IButtonConfigProps) => {
             return <CustomButton key={key} id={id} color={color}/>
           })
         }
@@ -66,15 +72,13 @@ const buttonGroup = (
 
       <div className="container">
         {
-          buttonConfig.map(props => {
+          buttonConfig.map((props: IButtonConfigProps) => {
             return <CustomButton {...props}/>
           })
         }
       </div>
     </>
 )
-
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(buttonGroup)

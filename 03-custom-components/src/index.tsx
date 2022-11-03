@@ -6,7 +6,12 @@ function Divider(){
   return <div style={{marginTop: 10, marginBottom:10}}></div>
 }
 
-function CustomButton({id, color}){
+interface CustomButtonProps {
+  id: string
+  color: string
+}
+
+function CustomButton({id, color}:CustomButtonProps){
   return (
       <button style={{
         backgroundColor: color,
@@ -49,7 +54,7 @@ const buttonConfig = [
   }
 ]
 
-interface IButtonConfigProps {
+interface ButtonConfigProps {
   id: string
   key: number
   color: string
@@ -60,7 +65,7 @@ const buttonGroup = (
       {/* with individual props */}
       <div className="container">
         {
-          buttonConfig.map(({id, key, color}:IButtonConfigProps) => {
+          buttonConfig.map(({id, key, color}:ButtonConfigProps) => {
             return <CustomButton key={key} id={id} color={color}/>
           })
         }
@@ -72,7 +77,7 @@ const buttonGroup = (
 
       <div className="container">
         {
-          buttonConfig.map((props: IButtonConfigProps) => {
+          buttonConfig.map((props: ButtonConfigProps) => {
             return <CustomButton {...props}/>
           })
         }
@@ -80,5 +85,5 @@ const buttonGroup = (
     </>
 )
 
-const root = ReactDOM.createRoot(document.getElementById('root'))
+const root = ReactDOM.createRoot(document.getElementById('root') as Element)
 root.render(buttonGroup)

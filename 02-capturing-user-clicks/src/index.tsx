@@ -3,8 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 
 // named function
-function showAlert () {
+function showAlert (): void {
   alert("The button was clicked!")
+  alert()
+  alert(1)
+  alert(true)
+  alert({name: "Michael"})
 }
 
 // arrow function or anonymous function
@@ -22,7 +26,7 @@ const showAlert = function () {
 */
 
 // passing a function
-const btn =  <button onClick={showAlert}>Click Me</button>
+const btn =  <button onClick={(event) => { showAlert()}}>Click Me</button>
 
 // passing an inline anonymous function
 // const btn =  <button onClick={() => { alert("The button was clicked!") }}>Click Me</button>

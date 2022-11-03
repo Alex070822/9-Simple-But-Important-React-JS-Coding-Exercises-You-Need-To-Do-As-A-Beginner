@@ -1,17 +1,31 @@
-import React from 'react';
+import React, {FC} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-function Divider(){
-  return <div style={{marginTop: 10, marginBottom:10}}></div>
+
+interface DividerProps {
+  margin?: number // optional != required
 }
 
-interface CustomButtonProps {
+const Divider: FC<DividerProps> = ({margin = 5 }) => {
+  return <div style={
+    {
+      marginTop: margin,
+      marginBottom:margin
+    }
+  }></div>
+}
+
+
+interface ButtonConfig {
+  key: number
   id: string
   color: string
 }
 
-function CustomButton({id, color}:CustomButtonProps){
+type CustomButtonProps = Pick<ButtonConfig, 'id' | 'color'>
+
+function CustomButton({id, color}: CustomButtonProps){
   return (
       <button style={{
         backgroundColor: color,
@@ -37,7 +51,9 @@ const buttonGroup = (
 )
 */
 
-const buttonConfig = [
+
+
+const buttonConfig: ButtonConfig[] = [
   {
     id: "1",
     key: 1,
@@ -54,31 +70,27 @@ const buttonConfig = [
   }
 ]
 
-interface ButtonConfigProps {
-  id: string
-  key: number
-  color: string
-}
 
 const buttonGroup = (
     <>
       {/* with individual props */}
       <div className="container">
         {
-          buttonConfig.map(({id, key, color}:ButtonConfigProps) => {
+          buttonConfig.map(({id, color, key}) => {
             return <CustomButton key={key} id={id} color={color}/>
           })
         }
       </div>
 
+      <Divider margin={10}/>
       <Divider/>
 
       {/* with spread props */}
 
       <div className="container">
         {
-          buttonConfig.map((props: ButtonConfigProps) => {
-            return <CustomButton {...props}/>
+          buttonConfig.map((item) => {
+            return <CustomButton {...item}/>
           })
         }
       </div>

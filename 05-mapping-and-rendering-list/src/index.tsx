@@ -2,7 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-const animals = [
+interface AnimalsProps {
+  name: string
+  translation: string
+  isQuadruped: boolean
+}
+
+const animals: AnimalsProps[] = [
   {name: 'dog', translation: 'perro', isQuadruped: true},
   {name: 'cat', translation: 'gato', isQuadruped: true},
   {name: 'chicken', translation: 'pollo', isQuadruped: false},
@@ -28,6 +34,5 @@ function AnimalList() {
   )
 }
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'))
+const root = ReactDOM.createRoot(document.getElementById('root') as Element)
 root.render(<AnimalList />)

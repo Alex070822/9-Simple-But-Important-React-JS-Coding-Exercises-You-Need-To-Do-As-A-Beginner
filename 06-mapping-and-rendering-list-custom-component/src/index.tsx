@@ -34,12 +34,11 @@ function getIcon(animal){
   }
 }
 
-
 const element = (
     <div className="root-container">
       <CustomAnimals></CustomAnimals>
     </div>
 )
 
-const root = ReactDOM.createRoot(document.getElementById('root'))
+const root = ReactDOM.createRoot(document.getElementById('root') as Element)
 root.render(element)

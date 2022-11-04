@@ -1,18 +1,24 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-function ClickCounter(props) {
-  console.log("# props:", props)
-  const [count, setCount] = useState(props.initialCount);
+interface CounterConfig {
+  increment: number
+  initialCount: number
+  count?: number
+  setCount?: number
+}
+
+const ClickCounter: FC<CounterConfig> = ({increment, initialCount}) => {
+  const [count, setCount] = useState<number>(initialCount);
 
   return(
       <>
         <p>Button has been clicked: {count} times</p>
-        <button onClick={()=> setCount(count + props.increment)}>
+        <button onClick={()=> setCount(count + increment)}>
           Click Me
         </button>
-        <button onClick={()=> setCount(props.initialCount)}>
+        <button onClick={()=> setCount(initialCount)}>
           Reset
         </button>
       </>
@@ -28,5 +34,5 @@ const element  = (
     </>
 )
 
-const root = ReactDOM.createRoot(document.getElementById('root'))
+const root = ReactDOM.createRoot(document.getElementById('root') as Element)
 root.render(element)

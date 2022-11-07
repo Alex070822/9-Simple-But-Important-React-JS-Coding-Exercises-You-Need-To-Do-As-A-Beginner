@@ -1,23 +1,32 @@
-import React from 'react';
+import React, {FC} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-const animals = ['dog', 'cat', 'chicken', 'cow', 'sheep', 'horse']
+type Animal = 'dog'| 'cat'| 'chicken'| 'cow'| 'sheep'| 'horse'
 
-function CustomAnimals() {
-  return animals.map((animal) => {
-    return <Item key={animal} animal={animal} />
+const animals: Animal[] = ['dog', 'cat', 'chicken', 'cow', 'sheep', 'horse']
+
+const CustomAnimals: FC = () => {
+  return <>
+    {
+      animals.map((animal) => {
+        return <Item key={animal} animal={animal} />
       })
+    }
+  </>
+}
+interface ItemProps {
+  animal: Animal
 }
 
-function Item(props){
-  const icon = getIcon(props.animal)
-  const name = props.animal
+function Item({animal}: ItemProps){
+  const icon = getIcon(animal)
+  const name = animal
 
   return <div className="item-container">{icon} <span className="animal-name">{name}</span></div>
 }
 
-function getIcon(animal){
+function getIcon(animal: Animal){
   switch (animal){
     case "dog":
       return '🐶'
@@ -36,7 +45,7 @@ function getIcon(animal){
 
 const element = (
     <div className="root-container">
-      <CustomAnimals></CustomAnimals>
+      <CustomAnimals/>
     </div>
 )
 

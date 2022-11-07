@@ -2,14 +2,12 @@ import React, {FC, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-interface CounterConfig {
+interface ClickCounterProps {
   increment: number
   initialCount: number
-  count?: number
-  setCount?: number
 }
 
-const ClickCounter: FC<CounterConfig> = ({increment, initialCount}) => {
+const ClickCounter: FC<ClickCounterProps> = ({increment, initialCount}) => {
   const [count, setCount] = useState<number>(initialCount);
 
   return(

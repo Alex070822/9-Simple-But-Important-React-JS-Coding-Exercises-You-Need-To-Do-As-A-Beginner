@@ -1,21 +1,21 @@
-import React from 'react';
+import React, {FC} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-interface AnimalsProps {
+interface AnimalConfig {
   name: string
   translation: string
-  isQuadruped: boolean
+  isDuped?: boolean
 }
 
-const animals: AnimalsProps[] = [
-  {name: 'dog', translation: 'perro', isQuadruped: true},
-  {name: 'cat', translation: 'gato', isQuadruped: true},
-  {name: 'chicken', translation: 'pollo', isQuadruped: false},
-  {name: 'duck', translation: 'pato', isQuadruped: false},
-  {name: 'cow', translation: 'vaca', isQuadruped: true},
-  {name: 'sheep', translation: 'oveja', isQuadruped: true},
-  {name: 'horse', translation: 'caballo', isQuadruped: true}
+const animals: AnimalConfig[] = [
+  {name: 'dog', translation: 'perro', isDuped: undefined},
+  {name: 'cat', translation: 'gato'},
+  {name: 'chicken', translation: 'pollo', isDuped: true},
+  {name: 'duck', translation: 'pato', isDuped: true},
+  {name: 'cow', translation: 'vaca' },
+  {name: 'sheep', translation: 'oveja' },
+  {name: 'horse', translation: 'caballo' }
 ]
 
 function AnimalList() {
@@ -23,16 +23,23 @@ function AnimalList() {
       <ul>
         {
           animals
-          .filter(animal => !animal.isQuadruped)
-          .map((animal) => {
-            return <li key={animal.name}>
-                  {animal.name} = {animal.translation}
-                </li>
-              })
+          .filter(({isDuped}) => isDuped)
+          .map(({name, translation}) => <AnimalItem name={name} translation={translation}/>)
         }
       </ul>
   )
 }
+
+
+const AnimalItem: FC<{
+  name: string
+  translation: string
+}> = ({name, translation}) =>  <li key={name}>
+    {getAnimalLabel(name, translation)}
+  </li>
+
+
+const getAnimalLabel = (name: string, translation: string) => `${name} = ${translation}`
 
 const root = ReactDOM.createRoot(document.getElementById('root') as Element)
 root.render(<AnimalList />)

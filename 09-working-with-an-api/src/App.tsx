@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import CardInfo from "./card-info"
+import CardInfo from "./CardInfo"
 import "./App.css"
 
 const endpointUrl = "https://random-data-api.com/api/users/random_user?size=10"

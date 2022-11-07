@@ -1,6 +1,16 @@
-import "./App.css"
+import "./App.css";
+import {FC} from "react";
 
-function CardInfo({ avatar, name, title, email, phoneNumber, address }) {
+interface CardProps {
+  avatar: string;
+  name: string;
+  title: string;
+  email: string;
+  phoneNumber: string;
+  address: string;
+}
+
+const CardInfo: FC<CardProps> = ({ avatar, name, title, email, phoneNumber, address }:CardProps) => {
   return (
     <div className="flipCard">
       <div className="flipCardInner">
@@ -23,7 +33,7 @@ function CardInfo({ avatar, name, title, email, phoneNumber, address }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default CardInfo
+export default CardInfo;

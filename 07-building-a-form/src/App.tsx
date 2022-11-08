@@ -82,18 +82,13 @@ function CustomForm() {
   );
 }
 
-interface FullName {
-  firstName: string;
-  lastName: string;
-}
-
-const HandleSubmit = (firstName, lastName) => {
+const HandleSubmit = (firstName: string, lastName: string) => {
   const msg = getGreetingMsg(firstName, lastName);
 
   alert(msg);
 };
 
-function getGreetingMsg(firstName, lastName) {
+function getGreetingMsg(firstName: string, lastName: string) {
   return `Hello ${firstName} ${lastName}!`;
 }
 

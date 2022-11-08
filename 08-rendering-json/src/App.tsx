@@ -2,7 +2,7 @@ import "./App.css";
 import { FC } from "react";
 
 interface Jokes {
-  id?: number;
+  id: number;
   setup: string;
   punchline: string;
 }
@@ -20,7 +20,7 @@ const jokes: Jokes[] = [
   },
 ];
 
-const JokeCard: FC<Jokes> = ({ setup, punchline }) => {
+const JokeCard: FC<Pick<Jokes, "setup" | "punchline">> = ({  setup, punchline }) => {
   return (
     <div className="card">
       <div className="setup">{setup}</div>

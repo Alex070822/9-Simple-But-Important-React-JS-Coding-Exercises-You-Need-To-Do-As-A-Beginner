@@ -36,10 +36,16 @@ import { useState } from "react";
 
 // using an single object for the full state
 
+
+interface CustomFormState {
+  firstName: string
+  lastName: string
+}
+
 function CustomForm() {
-  const [fullName, setFullName] = useState({
+  const [{firstName, lastName}, setFullName] = useState<CustomFormState>({
     firstName: "",
-    lastName: "",
+    lastName: ""
   });
 
   return (
@@ -47,11 +53,11 @@ function CustomForm() {
       <div>
         <input
           id="firstNameInput"
-          value={fullName.firstName}
+          value={firstName}
           onChange={(event) => {
             setFullName({
               firstName: event.target.value,
-              lastName: fullName.lastName,
+              lastName,
             });
           }}
           type="text"
@@ -61,10 +67,10 @@ function CustomForm() {
       <div>
         <input
           id="lastNameInput"
-          value={fullName.lastName}
+          value={lastName}
           onChange={(event) => {
             setFullName({
-              firstName: fullName.firstName,
+              firstName,
               lastName: event.target.value,
             });
           }}
@@ -74,7 +80,7 @@ function CustomForm() {
       </div>
       <button
         type="button"
-        onClick={() => HandleSubmit(fullName.firstName, fullName.lastName)}
+        onClick={() => handleSubmit(firstName, lastName)}
       >
         Greet me
       </button>
@@ -82,7 +88,7 @@ function CustomForm() {
   );
 }
 
-const HandleSubmit = (firstName: string, lastName: string) => {
+const handleSubmit = (firstName: string, lastName: string) => {
   const msg = getGreetingMsg(firstName, lastName);
 
   alert(msg);

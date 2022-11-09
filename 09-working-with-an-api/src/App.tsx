@@ -4,8 +4,45 @@ import "./App.css"
 
 const endpointUrl = "https://random-data-api.com/api/users/random_user?size=10"
 
+interface Employment {
+  title: string
+}
+
+interface Address {
+  city: string
+  state: string
+}
+
+interface ItemApi {
+  id: string
+  avatar: string
+  first_name: string
+  last_name: string
+  email: string
+  phone_number: string
+  employment: Employment
+  address: Address
+}
+
+interface Item {
+  id: string
+  avatar: string
+  firstName: string
+  lastName: string
+  email: string
+  phoneNumber: string
+  employment: Employment
+  address: Address
+}
+
+interface AppState{
+  items: Item[],
+  shouldLoadItems: boolean
+}
+
+
 function App() {
-  const [model, setModel] = useState({
+  const [{items, shouldLoadItems}, setModel] = useState<AppState>({
     items: [],
     shouldLoadItems: true,
   })
@@ -13,19 +50,19 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(endpointUrl)
-      const data = await response.json()
+      const data: ItemApi[] = await response.json()
 
       setModel({
-        items: data,
+        items: data.map(mapItemApiToItem),
         shouldLoadItems: false,
       })
     }
 
-    if(model.shouldLoadItems){
+    if(shouldLoadItems){
       fetchData()
     }
 
-  }, [model.shouldLoadItems])
+  }, [shouldLoadItems])
 
   function fetchRandomData() {
     setModel((prevState) => {
@@ -41,21 +78,57 @@ function App() {
       <button onClick={fetchRandomData}>Fetch Random</button>
       <div className="background">
         {
-          model.items.map((item) => (
+          items.map(({id,
+                             avatar,
+                             firstName,
+                             lastName,
+                             employment:{title: employmentTitle},
+                             address: {state, city},
+                             phoneNumber,
+                             email}) => (
+
               <CardInfo
-                  key={item.id}
-                  avatar={item.avatar}
-                  name={`${item.first_name} ${item.last_name}`}
-                  title={item.employment.title}
-                  email={item.email}
-                  phoneNumber={item.phone_number}
-                  address={`${item.address.city}, ${item.address.state}`}
+                  key={id}
+                  avatar={avatar}
+                  title={employmentTitle}
+                  email={email}
+                  phoneNumber={phoneNumber}
+                  name={getName(firstName, lastName)}
+                  address={getAddress(city, state)}
               />
           ))
         }
       </div>
     </div>
   )
+}
+
+function mapItemApiToItem({id,
+                            employment,
+                            email,
+                            phone_number,
+                            last_name,
+                            first_name,
+                            avatar,
+                            address}: ItemApi): Item {
+  return {
+    id,
+    avatar,
+    firstName: first_name,
+    lastName: last_name,
+    email,
+    phoneNumber: phone_number,
+    employment,
+    address
+  }
+}
+
+function getName(firstName: string, lastName: string) {
+  return `${firstName} ${lastName}`;
+}
+
+function getAddress(city: string, state: string) {
+  return `${city}, ${state}`;
 }
 
 export default App

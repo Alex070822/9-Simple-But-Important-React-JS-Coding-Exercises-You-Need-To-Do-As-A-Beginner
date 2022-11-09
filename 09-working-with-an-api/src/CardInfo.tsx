@@ -1,7 +1,7 @@
 import "./App.css";
 import {FC} from "react";
 
-interface CardItems {
+interface CardInfoProps {
   avatar: string;
   name: string;
   title: string;
@@ -10,7 +10,7 @@ interface CardItems {
   address: string;
 }
 
-const CardInfo: FC<CardItems> = ({ avatar, name, title, email, phoneNumber, address }:CardProps) => {
+const CardInfo: FC<CardInfoProps> = ({ avatar, name, title, email, phoneNumber, address }) => {
   return (
     <div className="flipCard">
       <div className="flipCardInner">
